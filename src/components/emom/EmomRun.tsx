@@ -200,7 +200,7 @@ export function EmomRun({ view, awake, onTogglePause, onAdjust, onSkip, onEnd }:
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="sticky top-14 z-30 -mx-4 -mt-4 flex h-14 items-center gap-2 border-b bg-background/95 px-4 backdrop-blur md:top-0 md:-mx-6 md:-mt-6 md:px-6">
+      <div className="sticky top-0 z-30 -mx-4 -mt-4 flex h-14 items-center gap-2 border-b bg-background/95 px-4 backdrop-blur md:-mx-6 md:-mt-6 md:px-6">
         <p className="min-w-0 flex-1 truncate font-mono text-sm tabular-nums sm:text-base">{where.filter(Boolean).join(' · ')}</p>
         <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
           <i role="img" aria-label="Saved in browser" title="Saved in browser" className="h-1.5 w-1.5 rounded-full bg-green-600 dark:bg-green-500" />
