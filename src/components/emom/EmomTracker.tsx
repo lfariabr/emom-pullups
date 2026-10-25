@@ -28,6 +28,7 @@ import { EmomRun } from './EmomRun';
 import { EmomSetup } from './EmomSetup';
 import { EmomSummary } from './EmomSummary';
 import { EmomTrainingLog } from './EmomTrainingLog';
+import { EmomHeader } from './EmomHeader';
 
 /** How long the DONE card holds before the summary takes over. */
 const DONE_HOLD_MS = 1500;
@@ -147,10 +148,7 @@ export function EmomTracker() {
 
   return (
     <div className="flex flex-col gap-5">
-      <header className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <h1 className="text-2xl font-extrabold uppercase tracking-wide">Beast EMOM</h1>
-        <p className="text-sm text-muted-foreground">Pull-ups on the minute</p>
-      </header>
+      <EmomHeader />
 
       {live && (
         <ResumeBanner
