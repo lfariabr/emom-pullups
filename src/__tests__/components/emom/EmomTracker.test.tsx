@@ -27,9 +27,9 @@ describe('EmomTracker', () => {
   it('updates the goal and duration when a preset is chosen', () => {
     render(<EmomTracker />);
 
-    fireEvent.click(screen.getByRole('button', { name: /The Beast · 8h/ }));
+    fireEvent.click(screen.getByRole('button', { name: /The Beast · 2,000/ }));
 
-    expect(screen.getByRole('button', { name: /The Beast · 8h/ })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByRole('button', { name: /The Beast · 2,000/ })).toHaveAttribute('aria-pressed', 'true');
     expect(screen.getByText('Duration').parentElement).toHaveTextContent('8:25');
     expect(screen.getByText(/Adds 25 min at 4\/min to reach 2,000/)).toBeInTheDocument();
   });

@@ -11,7 +11,7 @@ Set your reps per minute, blocks and service stops. At the top of each minute th
 
 ## Why "Beast"
 
-I built this for my own training toward *The Beast*: 2,000 pull-ups in a single day, run as eight 50-minute EMOM blocks with 10-minute service stops. The presets (Beast prep, Half-Beast, The Beast · 8h, Weekday grease) are the sessions I actually run. The default plan for a first visit is gentler: two 20-minute blocks at 3 a minute.
+I built this for my own training toward *The Beast*: 2,000 pull-ups in a single day, run as eight 50-minute EMOM blocks with 10-minute service stops. The presets (Beast prep, Half-Beast, The Beast · 2,000, Weekday grease) are the sessions I actually run. The default plan for a first visit is gentler: two 20-minute blocks at 3 a minute.
 
 It started as a page inside my portfolio, [luisfaria.dev](https://luisfaria.dev), and was extracted into this repo so anyone can use it.
 

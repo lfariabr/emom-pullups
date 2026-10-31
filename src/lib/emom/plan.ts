@@ -65,7 +65,7 @@ export const LIMITS: Record<PlanField, [number, number]> = {
 export const PRESETS: Preset[] = [
   { id: 'beast-prep', name: 'Beast prep', workMin: 50, breakMin: 10, rates: [5, 5, 5], goal: 0 },
   { id: 'half-beast', name: 'Half-Beast', workMin: 50, breakMin: 10, rates: [5, 5, 5, 5], goal: 0 },
-  { id: 'beast', name: 'The Beast · 8h', workMin: 50, breakMin: 10, rates: [5, 5, 5, 5, 5, 5, 4, 4], goal: 2000 },
+  { id: 'beast', name: 'The Beast · 2,000', workMin: 50, breakMin: 10, rates: [5, 5, 5, 5, 5, 5, 4, 4], goal: 2000 },
   { id: 'grease', name: 'Weekday grease', workMin: 10, breakMin: 0, rates: [5], goal: 0 },
 ];
 
