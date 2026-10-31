@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { blockSummaries, formatClock, formatPace, formatReps, sessionGoal, warRoomLogLine } from '@/lib/emom/plan';
+import { blockSummaries, formatClock, formatPace, formatReps, sessionGoal, summaryLogLine } from '@/lib/emom/plan';
 import type { FinishedSession } from '@/lib/emom/useEmomSession';
 import { cn } from '@/lib/utils';
 import { SIGNAL, WARN_TEXT } from './signal';
@@ -28,7 +28,7 @@ export function EmomSummary({ session, note, sessionNumber, onNoteChange, onBack
   const copiedTimer = useRef<number | undefined>(undefined);
   const { cfg, phases, adj, paces, secs, done, complete, startedAt } = session;
   const blocks = blockSummaries(cfg, phases, adj, paces, secs);
-  const logLine = warRoomLogLine(cfg, blocks, done, secs, startedAt, sessionNumber);
+  const logLine = summaryLogLine(cfg, blocks, done, secs, startedAt, sessionNumber);
   const showSkipped = blocks.some((b) => b.shortMinutes > 0);
   const vsGoal = done - sessionGoal(cfg);
   const signal = SIGNAL[cfg.color];
@@ -134,7 +134,7 @@ export function EmomSummary({ session, note, sessionNumber, onNoteChange, onBack
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <span className={LABEL}>War Room log line</span>
+        <span className={LABEL}>Log line</span>
         <pre className="whitespace-pre-wrap break-words rounded-lg border bg-muted/50 p-3 font-mono text-xs select-all">{logLine}</pre>
         {copied === 'failed' && <p className="text-xs text-muted-foreground">Copy was blocked. Select the line above and copy it manually.</p>}
       </div>

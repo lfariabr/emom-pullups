@@ -50,7 +50,9 @@ const isRates = (value: unknown): value is number[] =>
 export function loadConfig(): EmomConfig {
   const stored = read<Partial<EmomConfig>>(KEYS.config);
   if (!stored) return DEFAULT_CONFIG;
-  const merged = { ...DEFAULT_CONFIG, ...stored };
+  const logFormat = stored.logFormat === undefined ? 'legacy'
+    : ['simple', 'legacy', 'text'].includes(stored.logFormat) ? stored.logFormat : 'simple';
+  const merged = { ...DEFAULT_CONFIG, ...stored, logFormat };
   return isRates(merged.rates) ? merged : DEFAULT_CONFIG;
 }
 
