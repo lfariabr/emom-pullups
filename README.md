@@ -44,3 +44,15 @@ Issues and PRs are welcome. Please keep it backend-free: a feature that needs a 
 ## License
 
 [MIT](LICENSE) © Luis Faria
+
+### Summary log format
+
+Choose **Log format** in setup; the preference is saved in this browser with
+your plan and used by **Copy log line** after a session:
+
+- **Simple** (default for new visitors): `| date | total reps | duration |`.
+- **Detailed**: the original numbered row, including per-block totals, EMOM pace
+  and FIT duration. Existing saved plans keep this format.
+- **Text**: `date: total reps pull-ups in duration`, without Markdown table markup.
+
+Simple and Text use a local `YYYY-MM-DD` date and `hours:minutes:seconds` duration.
