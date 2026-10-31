@@ -4,6 +4,12 @@ A free EMOM (every minute on the minute) timer for pull-ups. It runs at **[emom-
 
 Set your reps per minute, blocks and service stops. At the top of each minute the screen flashes and beeps. Log a short minute when you miss reps, and see your month add up.
 
+![Setup screen in light mode, and the live view mid-session in light and dark mode](docs/screenshots/emom-screens.png)
+
+<p align="center">
+  <img src="docs/screenshots/emom-minute.gif" width="280" alt="The last seconds of a minute counting down in amber, then the full-screen GO flash for the next minute">
+</p>
+
 - **No account and no backend.** Your plan, training log and any unfinished session are saved in your browser's `localStorage`. Nothing is sent anywhere.
 - **Survives a refresh.** If the tab reloads mid-session, you can resume where you left off, paused.
 - **Made for the bar.** It has a full-screen flash, a big clock, a wake lock so the phone screen stays on, and a light or dark theme that follows your system.
