@@ -24,6 +24,26 @@ describe('EmomTracker', () => {
     jest.useRealTimers();
   });
 
+  it('persists the selected log format and copies that format from the summary', async () => {
+    const writeText = jest.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });
+    const first = render(<EmomTracker />);
+    fireEvent.click(screen.getByRole('button', { name: 'Text' }));
+    expect(JSON.parse(window.localStorage.getItem('emom:config')!).logFormat).toBe('text');
+    first.unmount();
+    render(<EmomTracker />);
+    expect(screen.getByRole('button', { name: 'Text' })).toHaveAttribute('aria-pressed', 'true');
+    fireEvent.click(screen.getByRole('button', { name: 'Start session' }));
+    advance(90_200);
+    fireEvent.click(screen.getByRole('button', { name: 'End' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Tap again to end' }));
+    const line = screen.getByText('2026-10-11: 10 pull-ups in 0:01:30');
+    fireEvent.click(screen.getByRole('button', { name: 'Copy log line' }));
+    expect(await screen.findByRole('button', { name: 'Copied ✓' })).toBeInTheDocument();
+    expect(writeText).toHaveBeenCalledWith(line.textContent);
+    delete (navigator as { clipboard?: unknown }).clipboard;
+  });
+
   it('updates the goal and duration when a preset is chosen', () => {
     render(<EmomTracker />);
 
@@ -231,6 +251,7 @@ describe('EmomTracker', () => {
   });
 
   it('polishes the summary: note save state, numbered log line, copy feedback, CTA order', async () => {
+    window.localStorage.setItem('emom:config', JSON.stringify({ ...HALF_BEAST, logFormat: 'legacy' }));
     const writeText = jest.fn().mockResolvedValue(undefined);
     Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });
     render(<EmomTracker />);

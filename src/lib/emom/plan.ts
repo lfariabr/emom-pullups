@@ -1,3 +1,5 @@
+export type LogFormat = 'simple' | 'legacy' | 'text';
+
 export type FlashMode = 'full' | 'panel';
 export type FlashColor = 'green' | 'red';
 
@@ -12,6 +14,7 @@ export interface EmomConfig {
   mode: FlashMode;
   color: FlashColor;
   sound: boolean;
+  logFormat: LogFormat;
 }
 
 export type PlanField = 'rate' | 'blocks' | 'workMin' | 'breakMin' | 'flashSec' | 'goal' | 'monthGoal';
@@ -80,6 +83,7 @@ export const DEFAULT_CONFIG: EmomConfig = {
   mode: 'full',
   color: 'green',
   sound: true,
+  logFormat: 'simple',
 };
 
 const sum = (values: number[]) => values.reduce((a, b) => a + b, 0);
@@ -297,4 +301,14 @@ export function warRoomLogLine(cfg: EmomConfig, blocks: BlockSummary[], done: nu
   const label = date.toLocaleDateString('en-AU', { weekday: 'short', day: 'numeric', month: 'short' });
   const parts = blocks.map((b) => `\`${b.reps}\`/${b.minutes}min`).join(' → stop → ');
   return `| ${n} | **${label}** | **\`${formatReps(done)}\`** | ${parts} | EMOM \`${sessionPace(cfg, blocks)}\`, FIT \`${formatClock(secs, true)}\` |`;
+}
+
+/** Render the selected export without changing session timing or totals. */
+export function summaryLogLine(cfg: EmomConfig, blocks: BlockSummary[], done: number, secs: number, date: Date, n: number): string {
+  if (!cfg.logFormat || cfg.logFormat === 'legacy') return warRoomLogLine(cfg, blocks, done, secs, date, n);
+  const label = localDateKey(date);
+  const duration = formatClock(secs, true);
+  return cfg.logFormat === 'text'
+    ? `${label}: ${formatReps(done)} pull-ups in ${duration}`
+    : `| ${label} | ${formatReps(done)} | ${duration} |`;
 }

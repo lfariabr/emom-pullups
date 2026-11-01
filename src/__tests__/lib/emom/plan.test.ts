@@ -22,6 +22,7 @@ import {
   tally,
   totalSeconds,
   warRoomLogLine,
+  summaryLogLine,
 } from '@/lib/emom/plan';
 
 const fromPreset = (id: string): EmomConfig => {
@@ -178,5 +179,22 @@ describe('emom plan', () => {
     expect(formatClock(42)).toBe('0:42');
     expect(formatClock(3725)).toBe('1:02:05');
     expect(formatClock(59, true)).toBe('0:00:59');
+  });
+});
+
+describe('summary log formats', () => {
+  const date = new Date('2026-10-11T07:00:00');
+  it('renders a simple Markdown row with date, reps and duration', () => {
+    expect(summaryLogLine({ ...DEFAULT_CONFIG, logFormat: 'simple' }, [], 120, 2700, date, 3))
+      .toBe('| 2026-10-11 | 120 | 0:45:00 |');
+  });
+  it('renders plain text without table markup', () => {
+    expect(summaryLogLine({ ...DEFAULT_CONFIG, logFormat: 'text' }, [], 120, 2700, date, 3))
+      .toBe('2026-10-11: 120 pull-ups in 0:45:00');
+  });
+  it('keeps the existing training row unchanged', () => {
+    const cfg = { ...DEFAULT_CONFIG, logFormat: 'legacy' as const };
+    expect(summaryLogLine(cfg, [], 120, 2700, date, 3))
+      .toBe(warRoomLogLine(cfg, [], 120, 2700, date, 3));
   });
 });

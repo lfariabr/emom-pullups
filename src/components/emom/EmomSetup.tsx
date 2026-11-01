@@ -277,6 +277,21 @@ export function EmomSetup({ cfg, onChange, onStart, aside }: EmomSetupProps) {
         </dl>
 
         <div className="flex flex-col gap-2">
+          <span className={LABEL}>Log format</span>
+          <Segment
+            label="Log format"
+            value={cfg.logFormat}
+            options={[
+              { value: 'simple', label: 'Simple' },
+              { value: 'legacy', label: 'Detailed' },
+              { value: 'text', label: 'Text' },
+            ]}
+            onSelect={(logFormat) => onChange({ ...cfg, logFormat })}
+          />
+          <p className="text-xs text-muted-foreground">Choose how the summary copies to your training log.</p>
+        </div>
+
+        <div className="flex flex-col gap-2">
           <span className={LABEL}>Session map</span>
           <SessionMap cfg={cfg} phases={buildPhases(cfg)} />
         </div>
